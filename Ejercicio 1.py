@@ -51,6 +51,105 @@ class Entidad(ABC):
 # PERSONA 02: MANEJO AVANZADO DE EXCEPCIONES
 # Debes crear una jerarquía de excepciones personalizadas para capturar fallos del negocio sin detener la ejecución de la aplicación.
 
+class SoftwareFJException(Exception):
+    """
+    Excepción base del sistema.
+    Todas las excepciones personalizadas deben heredar de esta clase.
+    """
+
+    def __init__(self, mensaje: str):
+        super().__init__(mensaje)
+        self.mensaje = mensaje
+
+    def __str__(self):
+        return self.mensaje
+
+
+# ----------------------------
+# EXCEPCIONES DE CLIENTES
+# ----------------------------
+
+class ClienteException(SoftwareFJException):
+    """Errores relacionados con clientes."""
+    pass
+
+
+class ClienteInvalidoError(ClienteException):
+    """Datos inválidos en el registro del cliente."""
+    pass
+
+
+class CorreoInvalidoError(ClienteException):
+    """Formato incorrecto de correo electrónico."""
+    pass
+
+
+class DocumentoInvalidoError(ClienteException):
+    """Documento no válido."""
+    pass
+
+
+# ----------------------------
+# EXCEPCIONES DE SERVICIOS
+# ----------------------------
+
+class ServicioException(SoftwareFJException):
+    """Errores relacionados con servicios."""
+    pass
+
+
+class ServicioNoDisponibleError(ServicioException):
+    """Servicio fuera de disponibilidad."""
+    pass
+
+
+class ParametroServicioError(ServicioException):
+    """Parámetros inválidos para el servicio."""
+    pass
+
+
+class CostoInvalidoError(ServicioException):
+    """Costo incorrecto o inconsistente."""
+    pass
+
+
+# ----------------------------
+# EXCEPCIONES DE RESERVAS
+# ----------------------------
+
+class ReservaException(SoftwareFJException):
+    """Errores relacionados con reservas."""
+    pass
+
+
+class ReservaDuplicadaError(ReservaException):
+    """Intento de crear una reserva ya existente."""
+    pass
+
+
+class ReservaCanceladaError(ReservaException):
+    """La reserva ya fue cancelada."""
+    pass
+
+
+class ReservaNoValidaError(ReservaException):
+    """La reserva contiene información incorrecta."""
+    pass
+
+
+# ----------------------------
+# EXCEPCIONES DE PROCESAMIENTO
+# ----------------------------
+
+class OperacionNoPermitidaError(SoftwareFJException):
+    """Operación no autorizada o fuera de flujo."""
+    pass
+
+
+class ErrorProcesamientoSistema(SoftwareFJException):
+    """Error general del sistema."""
+    pass
+
 # PERSONA 03: GESTIÓN DE CLIENTES Y ENCAPSULACIÓN
 # Debes implementar la clase Cliente heredando de Entidad, aplicando encapsulación estricta y validaciones en setters para datos personales, cómo
 #  se nos pide en la guía.
